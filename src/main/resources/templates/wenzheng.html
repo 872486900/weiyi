@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>在线问诊</title>
+    <script src="js/JQuery.js"></script>
+    <script src="js/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link href="js/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/color.css" rel="stylesheet"/>
+    <link href="css/common.css" rel="stylesheet"/>
+    <link href="css/global.css" rel="stylesheet"/>
+    <link href="css/jb.css" rel="stylesheet"/>
+    <script src="js/jquery.goup.min.js"></script>
+    <link href="/css/homepage.css" rel="stylesheet"/>
+
+
+</head>
+<body>
+<!--导航-->
+<div th:replace="_fragments::nav"></div>
+
+<div id="third" class="width-main center">
+    <div class="navi bg-lightgray" id="hotnavi">
+        <div class="bg-darkblue navi-item text-white text-center">推荐专家</div>
+    </div>
+
+    <div class="tabbable" id="tabs-330773"><!-- Only required for left/right tabs -->
+        <ul class="nav nav-tabs">
+            <li th:each="type:${types}" th:class="${type.tid}==1?active:''">
+                <a  data-toggle="tab" th:date-toggle="tab" th:aria-expanded="${type.tid}==1?true:flase"
+                href="#panel-948708" th:href="'#panel-'+${type.tid}+17053156">
+                <p th:text="${type.tname}">内科</p>
+                </a>
+            </li>
+            <li><a contenteditable="true" data-toggle="tab" href="#panel-948708">其他</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="panel-117053156"  class="tab-pane" th:each="type:${types}"
+                 th:id="'panel-'+${type.tid}+'17053156'"
+                th:class="${type.tid}?'tab-pane active'"
+            >
+                <!--医生-->
+                <div id="doctors" class="docter-list">
+                    <div class="doctor-item" th:each="doctor: ${doctors}" th:if="${doctor.type.tid}==${type.tid}">
+                        <div class="doctor-img-box">
+                            <img src="images/doc_01.jpg" alt="医生头像" class="img-circle" th:src="${doctor.dphoto}"/>
+                        </div>
+                        <div><h4 th:text="${doctor.dname}">贾栋</h4></div>
+                        <div th:text="${doctor.hospital.hname}">空军军医大学唐都医院</div>
+                        <div th:text="${doctor.type.tname}">神经外科</div>
+                        <div class="doctor-item-bottom text-center">
+                            <div class="doctor-special" th:text="'擅长'+${doctor.dgood}">擅长:擅长痤疮、黄褐斑、脱发、性病的治疗。</div>
+                        </div>
+                        <div class="row-fluid">
+                            <div style="float: left;padding-right: 10px">
+                                <a th:href="@{/doctor/{did}(did=${doctor.did})}" class="left"><button class="btn btn-primary" type="button">图文问诊</button></a>
+                            </div>
+                            <div style="float: right;">
+                                <a th:href="@{/doctor/{did}(did=${doctor.did})}" class="left"><button class="btn btn-primary" type="button">视频问诊</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane" contenteditable="true" id="panel-948708">
+                <p>第二部分内容.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div th:replace="_fragments::foot"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

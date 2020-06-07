@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>惟医-在线问诊</title>
+    <script src="/js/JQuery.js"></script>
+    <script src="/js/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link href="/js/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/color.css" rel="stylesheet"/>
+    <link href="/css/common.css" rel="stylesheet"/>
+    <link href="/css/global.css" rel="stylesheet"/>
+    <link href="/css/jb.css" rel="stylesheet"/>
+    <script src="/js/jquery.goup.min.js"></script>
+    <link href="/css/homepage.css" rel="stylesheet"/>
+</head>
+<body>
+<!--导航-->
+<div th:replace="_fragments::nav"></div>
+
+<div id="third" class="width-main center">
+    <div class="navi bg-lightgray" id="hotnavi">
+        <div class="bg-darkblue navi-item text-white text-center">推荐专家</div>
+    </div>
+    <div class="tabbable" id="tabs-65424"><!-- Only required for left/right tabs -->
+        <ul class="nav nav-tabs" >
+            <li><a href="" style="color: #0C0C0C">省份：</a></li>
+            <li th:each="province:${provinces}" th:class="${province.code}==440000?active">
+                <a data-toggle="tab" th:date-toggle="tab" th:aria-expanded="${province.code}==440000?true:flase"
+                   href="#panel-948708" th:href="'#panel-'+${province.id}+17053156" >
+                    <p th:text="${province.name}">广东</p>
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" contenteditable="false" id="panel-117053156"
+                 th:each="province:${provinces}"
+                 th:id="'panel-'+${province.id}+'17053156'"
+                 th:class="${province.code}?'tab-pane active'"
+                 th:if="${province.code}!=null"
+            >
+
+                <!--城市-->
+                <div class="tabbable" > <!-- Only required for left/right tabs -->
+                    <ul class="nav nav-tabs">
+                        <li><a style="color: #0C0C0C"><p th:text="${province.name}">广东省</p></a></li>
+                        <li th:each="city:${cities}" th:if="${city.provinceCode}==${province.code}" th:class="${city.code}==440100?active">
+                            <a data-toggle="tab" th:date-toggle="tab" th:aria-expanded="${city.code}==440100?true:flase"
+                               href="#panel-948708" th:href="'#city-'+${city.id}+17053156"
+                            >
+                                <p th:text="${city.name}">广州市区</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" contenteditable="false" id="city-20017053156"
+                             th:each="city:${cities}"
+                             th:id="'city-'+${city.id}+17053156"
+                             th:class="${city.code} ?'tab-pane active'"
+                             th:if="${city.provinceCode}==${province.code}"
+                        >
+                            <!--<p th:text="${city.name}" th:if="${city.provinceCode}==${province.code}"></p>-->
+                            <div class="media" th:each="hospital:${hospitals}"
+                                 th:if="${hospital.cityCode}==${city.code}" >
+                                <div class="media-left media-middle">
+                                    <a href="#">
+                                        <img class="media-object" src="/images/hos.jpg" alt=""
+                                             th:src="${hospital.hphoto}">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h3 th:text="${hospital.hname}"></h3>
+                                    <p th:text="'地址：'+${hospital.haddress}"></p>
+                                    <p th:text="'电话：'+${hospital.htel}"></p>
+                                    <p th:text="'简介：'+${hospital.hintroduction}"></p>
+                                </div>
+                                <div class="media-right">
+                                    <h1>&nbsp;</h1>
+                                    <a th:href="@{/hospital/{hid}(hid=${hospital.hid})}"><button type="button" class="btn btn-primary">挂号</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+</div>
+
+
+<div th:replace="_fragments::foot"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

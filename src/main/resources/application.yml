@@ -1,0 +1,30 @@
+spring:
+  thymeleaf:
+    mode: HTML
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect #设置创建表的引擎为InnoDB
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/weiyi?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+
+
+
+
+
+logging:
+  level:
+    root: info
+  file:
+    name: log/weiyi.log
+
+#mybatis:
+#  type-aliases-package: com.example.weiyi.entity
+#  mapper-locations: classpath:mapper/*.xml
+#  configuration:
+#    map-underscore-to-camel-case: true

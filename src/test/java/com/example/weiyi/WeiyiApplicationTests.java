@@ -1,0 +1,18 @@
+package com.example.weiyi;
+
+import com.example.weiyi.entity.User;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
+
+@SpringBootTest
+class WeiyiApplicationTests {
+
+    @Test
+    void contextLoads() {
+
+    }
+
+}

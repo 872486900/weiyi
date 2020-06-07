@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>惟医-我的订单</title>
+    <script src="js/JQuery.js"></script>
+    <script src="js/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link href="js/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/color.css" rel="stylesheet"/>
+    <link href="css/common.css" rel="stylesheet"/>
+    <link href="css/global.css" rel="stylesheet"/>
+    <link href="css/user.css" rel="stylesheet"/>
+    <script src="js/jquery.goup.min.js"></script>
+    <link href="/css/homepage.css" rel="stylesheet"/>
+</head>
+<body>
+<!--导航-->
+<div th:replace="_fragments::nav"></div>
+
+
+<div id="third" class="width-main center">
+    <div class="navi bg-lightgray">
+        <div class="bg-darkblue navi-item text-white text-center">我的订单</div>
+    </div>
+</div>
+<div id="forth" class="width-main center">
+    <div id="orderlist" class="list-group">
+        <div class="list-group-item flex-horizontal-around list-head">
+            <div>医院</div>
+            <div>医生名</div>
+            <div>科室</div>
+            <div>日期</div>
+            <div>价格</div>
+        </div>
+        <div class="list-group-item flex-horizontal-around list-group-item" th:each="order:${orders}">
+            <a th:href="@{/hospital/{hid}(hid=${order.doctor.hospital.hid})}">
+                <div th:text="${order.doctor.hospital.hname}" style="width: 150px">医院</div>
+            </a>
+            <a th:href="@{/doctor/{did}(did=${order.doctor.did})}">
+                <div th:text="${order.doctor.dname}">医师名</div>
+            </a>
+            <div th:text="${order.doctor.type.tname}">科室</div>
+            <div th:text="${order.date}">日期</div>
+            <div th:text="${order.doctor.dfei}">价格</div>
+        </div>
+
+    </div>
+</div>
+<div th:replace="_fragments::foot"></div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <base target="_blank">
+    <title>在线问诊</title>
+    <link rel="stylesheet" href="/css/zaixian.css">
+</head>
+<body lang="zh">
+<div class="abs cover contaniner">
+    <div class="abs cover pnl">
+        <div class="top pnl-head" style="background-color: #0C0C0C"></div>
+        <div class="abs cover pnl-body" id="pnlBody">
+            <div class="abs cover pnl-left">
+                <div class="abs cover pnl-msgs scroll" id="show">
+                    <div class="msg min time" id="histStart">加载历史消息</div>
+                    <div class="pnl-list" id="hists">
+                        <!-- 历史消息 -->
+                    </div>
+                    <div class="pnl-list" id="msgs">
+                        <div class="msg robot">
+                            <div class="msg-left" id="welcomeLeft" worker="用户">
+                                <div class="msg-host photo" id="welcomeIcon"></div>
+                                <div class="msg-ball" id="welcomeBall"><span>你好，我是只能打字的聊天机器人<br><br>您是想要了解哪些方面呢？</span></div>
+                            </div>
+                        </div>
+                        <div class="msg guest">
+                            <div class="msg-right" customer="游客">
+                                <div class="msg-host">
+                                    <i class="ic kh"></i>
+                                </div>
+                                <div class="msg-ball" title="今天 17:52:06">你好
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pnl-list hide" id="unreadLine">
+                        <div class="msg min time unread">未读消息</div>
+                    </div>
+                </div>
+                <div class="abs bottom pnl-text">
+                    <div class="ques-pnl scroll hide" id="quesPnl">
+                        <ul class="questions unselect" id="ques"></ul>
+                    </div>
+                    <div class="abs top pnl-warn" id="pnlWarn">
+
+                        <div class="fl right pnl-warn-right">
+                            <span class="sess-status" id="sessStatus"></span>
+                            <span id="val-left" style="display:none;">您还可以输入<span id="valleft">450</span>字</span>
+                        </div>
+                    </div>
+                    <div class="abs cover pnl-input">
+                        <textarea class="scroll" id="text" wrap="hard" placeholder="在此输入..."></textarea>
+                        <div class="abs atcom-pnl scroll hide" id="atcomPnl">
+                            <ul class="atcom" id="atcom">
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="abs br pnl-btn" id="submit" style="background-color: rgb(32, 196, 202); color: rgb(255, 255, 255);">发送</div>
+                </div>
+            </div>
+            <div class="abs right pnl-right">
+                <div class="slider-container hide"></div>
+                <div class="pnl-right-content">
+                    <div class="pnl-tabs">
+                        <div class="tab-btn active" id="hot-tab">常见问题</div>
+                    </div>
+                    <div class="pnl-hot">
+                        <ul class="rel-list unselect" id="hots">
+                            有什么问题吗
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var _hrefParam = _getHrefSearch(), ie = _getIeVersion(), phone = _hrefParam.dev == 'phone';
+    window.parent && window.parent !== window && (!ie || ie > 8) && (document.body.className += ' ifr');
+    phone && (document.body.className += ' phone');
+
+    var scale = _hrefParam.scale;
+    scale && document.write('<meta name="viewport" content="width=device-width, initial-scale='+scale+', maximum-scale='+scale+', user-scalable=no">');
+</script>
+</body>
+</html>
