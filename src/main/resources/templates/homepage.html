@@ -148,7 +148,7 @@
 
     <!--医生-->
     <div id="doctors" class="docter-list">
-        <div class="doctor-item" th:each="doctor,iterStat:${page.content}">
+        <div class="doctor-item" th:each="doctor,iterStat:${page.content}" th:if="${doctor.hospital}!=null">
             <div class="doctor-img-box">
                 <img src="images/doc_01.jpg" alt="医生头像" class="img-circle" th:src="${doctor.dphoto}"/>
             </div>

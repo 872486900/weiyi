@@ -5,7 +5,9 @@ import com.example.weiyi.entity.Hospital;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,5 +22,6 @@ public interface DoctorDao extends JpaRepository<Doctor,Long> {
 
     @Query("select d from Doctor d where d.Dtel=:Dtel and d.pwd=:pwd")
     Doctor findByDtelAndPwd(String Dtel,String pwd);
+
 
 }

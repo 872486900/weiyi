@@ -4,13 +4,18 @@ import com.example.weiyi.dao.DoctorDao;
 import com.example.weiyi.entity.Doctor;
 import com.example.weiyi.entity.Hospital;
 import com.example.weiyi.service.DoctorService;
+import com.example.weiyi.util.MyBeanUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
 
 /**
  * Created by 87248 on 2020-06-01 18:22
@@ -46,10 +51,10 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public Page<Doctor> findByHid(Long Hid,Pageable pageable) {
+    public Page<Doctor> findByHid(Long Hid, Pageable pageable) {
         Hospital hospital = new Hospital();
         hospital.setHid(Hid);
-        return doctorDao.findByHospital(hospital,pageable);
+        return doctorDao.findByHospital(hospital, pageable);
     }
 
     @Override
@@ -64,6 +69,16 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Doctor doctorLogin(String Dtel, String pwd) {
-        return doctorDao.findByDtelAndPwd(Dtel,pwd);
+        return doctorDao.findByDtelAndPwd(Dtel, pwd);
     }
+
+    @Transactional
+    @Override
+    public Doctor updateDoctor(Long did, Doctor doctor) {
+        Doctor d = doctorDao.getOne(did);
+        BeanUtils.copyProperties(doctor,d, MyBeanUtils.getNullPropertyNames(doctor));
+        return doctorDao.save(d);
+    }
+
+
 }

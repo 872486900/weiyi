@@ -1,9 +1,11 @@
 package com.example.weiyi.controller;
 
 import com.example.weiyi.entity.Doctor;
+import com.example.weiyi.entity.Hospital;
 import com.example.weiyi.entity.Type;
 import com.example.weiyi.service.AddressService;
 import com.example.weiyi.service.DoctorService;
+import com.example.weiyi.service.HospitalService;
 import com.example.weiyi.service.TypeService;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.ibatis.annotations.Mapper;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -31,6 +34,8 @@ public class DoctorController {
     private TypeService typeService;
     @Autowired
     private AddressService addressService;
+    @Autowired
+    private HospitalService hospitalService;
 
     @GetMapping("doctor/login")
     public String docotr(){
@@ -131,9 +136,31 @@ public class DoctorController {
     public String index(){
         return "doctor/index";
     }
+
     @GetMapping("doctor/welcome")
     public String welcome(){
         return "doctor/welcome";
     }
 
+    @GetMapping("doctor/about")
+    public String about(Model model){
+        model.addAttribute("hospitals",hospitalService.findAll());
+        model.addAttribute("types",typeService.findAll());
+        return "doctor/about";
+    }
+
+    @PostMapping("doctor/update/{did}")
+    public String update(@Valid Long did,
+                         @Valid Long hid,
+                         @Valid Long tid,
+                         Model model,
+                         Doctor doctor
+                         ){
+        System.out.println(doctor);
+        doctor.setHospital(hospitalService.findByHid(hid));
+        doctor.setType(typeService.findOne(tid));
+        Doctor doctor1 = doctorService.updateDoctor(did, doctor);
+        System.out.println(doctor1);
+        return "redirect:/doctor/about";
+    }
 }

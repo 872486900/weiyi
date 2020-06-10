@@ -23,5 +23,6 @@ public interface DoctorService {
 
     Doctor doctorRegister(Doctor doctor);
     Doctor doctorLogin(String Dtel,String pwd);
+    Doctor updateDoctor(Long did,Doctor doctor);
 
 }

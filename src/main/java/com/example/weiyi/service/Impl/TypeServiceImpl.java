@@ -21,4 +21,9 @@ public class TypeServiceImpl implements TypeService {
     public List<Type> findAll() {
         return typeDao.findAll();
     }
+
+    @Override
+    public Type findOne(Long tid) {
+        return typeDao.getOne(tid);
+    }
 }

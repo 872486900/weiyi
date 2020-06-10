@@ -42,7 +42,7 @@
             >
                 <!--医生-->
                 <div id="doctors" class="docter-list">
-                    <div class="doctor-item" th:each="doctor: ${doctors}" th:if="${doctor.type.tid}==${type.tid}">
+                    <div class="doctor-item" th:each="doctor: ${doctors}" th:if="${doctor.type.tid}==${type.tid} and ${doctor.hospital}!=null" >
                         <div class="doctor-img-box">
                             <img src="images/doc_01.jpg" alt="医生头像" class="img-circle" th:src="${doctor.dphoto}"/>
                         </div>
