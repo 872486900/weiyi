@@ -12,4 +12,5 @@ public interface HospitalService {
     List<Hospital> findCode(String cityCode);
     List<Hospital> findAll();
     Hospital findByHid(Long Hid);
+    void delHospital(Long hid);
 }

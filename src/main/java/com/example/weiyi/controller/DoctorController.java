@@ -2,6 +2,7 @@ package com.example.weiyi.controller;
 
 import com.example.weiyi.entity.Doctor;
 import com.example.weiyi.entity.Type;
+import com.example.weiyi.service.AddressService;
 import com.example.weiyi.service.DoctorService;
 import com.example.weiyi.service.TypeService;
 import com.sun.org.apache.xpath.internal.operations.Mod;
@@ -12,10 +13,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -28,6 +29,53 @@ public class DoctorController {
     private DoctorService doctorService;
     @Autowired
     private TypeService typeService;
+    @Autowired
+    private AddressService addressService;
+
+    @GetMapping("doctor/login")
+    public String docotr(){
+        return "doctor/login";
+    }
+    @PostMapping("doctor/login")
+    public String docotr(@RequestParam String Dtel,
+                         @RequestParam String pwd,
+                         HttpSession session,
+                         RedirectAttributes attributes,
+                         Model model){
+        Doctor doctor = doctorService.doctorLogin(Dtel, pwd);
+        if (doctor!=null){
+            doctor.setPwd(null);
+            session.setAttribute("doctor",doctor);
+            System.out.println("登录成功");
+            model.addAttribute("message","登录成功");
+            return "redirect:/doctor/index";
+        } else {
+            attributes.addFlashAttribute("message", "用户登录失败,请重新输入");
+            System.out.println("用户登录失败");
+            return "redirect:/doctor/login";
+        }
+
+    }
+
+    @GetMapping("doctor/register")
+    public String register(){
+        return "doctor/register";
+    }
+    @PostMapping("doctor/register")
+    public String register(Doctor doctor,
+                           Model model,
+                           HttpSession session,
+                           HttpServletRequest request){
+        String province = request.getParameter("province");
+        String city = request.getParameter("city");
+        String area = request.getParameter("area");
+        String address = province + "/" + city + "/" + area;
+        doctor.setDaddress(address);
+        doctorService.doctorRegister(doctor);
+        System.out.println("注册成功，请登录");
+        model.addAttribute("message","注册成功，请登录");
+        return "doctor/login";
+    }
 
     @RequestMapping("/doctor/{did}")
     public String doctor(Model model,
@@ -77,4 +125,15 @@ public class DoctorController {
     {
         return "zaixian";
     }
+
+
+    @GetMapping("doctor/index")
+    public String index(){
+        return "doctor/index";
+    }
+    @GetMapping("doctor/welcome")
+    public String welcome(){
+        return "doctor/welcome";
+    }
+
 }

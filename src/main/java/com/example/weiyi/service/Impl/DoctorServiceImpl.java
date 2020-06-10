@@ -51,4 +51,19 @@ public class DoctorServiceImpl implements DoctorService {
         hospital.setHid(Hid);
         return doctorDao.findByHospital(hospital,pageable);
     }
+
+    @Override
+    public void delDoctor(Long did) {
+        doctorDao.deleteById(did);
+    }
+
+    @Override
+    public Doctor doctorRegister(Doctor doctor) {
+        return doctorDao.save(doctor);
+    }
+
+    @Override
+    public Doctor doctorLogin(String Dtel, String pwd) {
+        return doctorDao.findByDtelAndPwd(Dtel,pwd);
+    }
 }

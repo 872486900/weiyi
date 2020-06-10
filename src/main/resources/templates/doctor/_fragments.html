@@ -20,33 +20,6 @@
             <div id="top-doc" class="text-darkgray pull-left"><a class="a-normal text-lightblue" href="/doctor/login">医生端</a></div>
             <div id="top-back" class="text-darkgray pull-left"><a class="a-normal text-lightblue" href="/admin/">后台管理</a>
             </div>
-            <div th:if="${session.user==null}">
-                <div class="pull-right">&nbsp;<a th:href="@{/register}" class="a-normal text-lightblue">注册</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </div>
-                <div class="pull-right">&nbsp;<a th:href="@{/login}" class="a-normal text-lightblue">登录</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </div>
-            </div>
-
-
-            <div th:if="${session.user!=null}">
-                <div class="pull-right">&nbsp;
-                    <div class="pull-right">
-                        <li class="dropdown">你好，用户
-                            <a class="dropdown-toggle glyphicon glyphicon-chevron-down" data-toggle="dropdown" href="#"
-                               th:text="${session.user.uname}">用户名称</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">我的信息</a></li>
-                                <li><a href="#" th:href="@{/order}">我的订单</a></li>
-                                <li class="divider">&nbsp;</li>
-                                <li><a href="#" th:href="@{/logout}">退出</a></li>
-                            </ul>
-                        </li>
-                    </div>
-                </div>
-
-            </div>
-
-
         </div>
     </div>
     <div id="subtop" class="width-main center">

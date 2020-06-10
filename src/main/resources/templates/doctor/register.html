@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>惟医-注册</title>
+    <script src="/js/JQuery.js"></script>
+    <script src="/js/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link href="/js/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/color.css" rel="stylesheet"/>
+    <link href="/css/common.css" rel="stylesheet"/>
+    <link href="/css/global.css" rel="stylesheet"/>
+    <link href="/css/register.css" rel="stylesheet"/>
+    <link href="/css/homepage.css" rel="stylesheet"/>
+    <link href="/js/bootstrap-fileinput/css/fileinput.css" rel="stylesheet"/>
+    <link href="/js/bootstrap-fileinput/css/fileinput-rtl.css" rel="stylesheet"/>
+    <script type="text/javascript" src="/js/jquery.webcam.js"></script>
+    <script src="/js/bootstrap-fileinput/js/fileinput.js"></script>
+    <script src="/js/bootstrap-fileinput/js/locales/zh.js"></script>
+    <script src="/js/register.js"></script>
+
+
+</head>
+<body>
+
+<!--导航-->
+<div th:replace="/doctor/_fragments::nav"></div>
+
+<div id="third" class="width-main center">
+    <div class="navi bg-lightgray">
+        <div class="bg-darkblue navi-item text-white text-center" ><a href="/doctor/login"> 医生登录</a></div>
+        <div class="bg-darkblue navi-item text-white text-center" style="width: 20px">|</div>
+        <div class="bg-darkblue navi-item text-white text-center" ><a href="/doctor/register"> 医生注册</a></div>
+    </div>
+    <!--提示-->
+    <div class="modal-dialog" role="document">
+        <div class="center">
+            <div th:unless="${#strings.isEmpty(message)}" class="alert alert-warning alert-dange" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <strong>提示：</strong><!--/*@thymesVar id="messages" type=""*/-->
+                <p th:text="${message}">恭喜，操作成功</p>
+            </div>
+        </div>
+    </div>
+    <form id="form" class="center form-horizontal"  method="post">
+        <h2>医生注册</h2>
+        <hr>
+        <div class="form-group">
+            <label class="col-lg-3 control-label">姓名：</label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control" name="dname" id="name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label">性别：</label>
+            <div class="col-lg-9">
+                <label class="radio-inline">
+                    <input type="radio" name="sex" id="sex_male" value="男" checked> 男
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="sex" id="sex_female" value="女"> 女
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label">身份证件：</label>
+            <div class="col-lg-9">
+                <select class="form-control" name="cardtype">
+                    <option selected>身份证</option>
+                    <option>军官证</option>
+                    <option>护照</option>
+                    <option>港澳通行证</option>
+                    <option>同胞证</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label">证件号码：</label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control" name="cardid" id="cardid">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label">确认号码：</label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control" id="cardid_confirm">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label">设置密码：</label>
+            <div class="col-lg-9">
+                <input type="password" class="form-control" name="pwd" id="pwd" placeholder="请输入6-12位的字母或数字">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label">确认密码：</label>
+            <div class="col-lg-9">
+                <input type="password" class="form-control" id="pwd_confirm">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label">现居住地：</label>
+            <div id="address" class="form-inline col-lg-9">
+                <select id="sel1" class="form-control" name="province">
+                <option>选择省份</option>
+                </select>
+                <select id="sel2" class="form-control" name="city">
+                <option>选择城市</option>
+                </select>
+                <select id="sel3" class="form-control" name="area">
+                <option>选择区镇</option>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label">手机号码：</label>
+            <div class="col-lg-9">
+                <input type="tel" class="form-control" name="Dtel" id="tel">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label">照片：</label>
+            <div class="col-lg-3">
+                <input type="file" class="form-control" name="Dphoto" onchange="showImg()" id="userAvatar">
+            </div>
+            <div class="col-lg-3">
+                <img  alt="" id="img_id" style="width: 100px" >
+            </div>
+        </div>
+        <!--            <div class="form-group">
+                        <label class="col-lg-3 control-label">邮箱验证码：</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" name="code" id="code">
+                        </div>
+                        <div class="col-lg-3">
+                            <input type="button" class="btn btn-default text-small text-lightblue" id="codebtn" value="获取验证码">
+                        </div>
+                    </div>-->
+        <input type="submit" class="btn center bg-yellow text-white" id="submit" value="注册"/>
+    </form>
+</div>
+<div th:replace="_fragments::foot"></div>
+
+
+</body>
+
+
+<script type="text/javascript">
+    $(function () {   //页面加载执行ajax封装的get请求方法调用省级查询全部
+        $.get("/one", function (reult) {
+            $.each(reult, function (index, item) {
+                var row = "<option id='" + item.code + "'>" + item.name + "</option>"    //把返回结果的省级对象的编号code作为id值，name作为文本值
+                $("#sel1").append(row)
+            })
+        })
+
+    })
+    $("#sel1").change(function () {  //省级下拉框选项改变时触发，先清空市区级下拉框
+        $("#sel2").empty();
+        $("#sel2").append("<option>请选择</option>")
+        $("#sel3").empty();
+        $("#sel3").append("<option>请选择</option>")
+        var provinceCode = $(this).find("option:checked").attr("id");  //取省级的id值，即省级的code编号
+        if (provinceCode == null || provinceCode == "") {
+            return false;
+        }
+        $.get("/two", {"provinceCode": provinceCode}, function (result) {   //使用$.get()方法走查询省对应的市级，把省级的code作为参数传过去
+            $.each(result, function (index, item) {
+                var row = "<option id='" + item.code + "'>" + item.name + "</option>"  //同样把返回结果的市级对象的编号code作为id值，name作为文本值
+                $("#sel2").append(row)
+            })
+        })
+
+    })
+    $("#sel2").change(function () {  //当市级下拉框改变时，触发的事件，与上面的无异
+        $("#sel3").empty();
+        $("#sel3").append("<option>请选择</option>")
+        var cityCode = $(this).find("option:checked").attr("id");
+        if (cityCode == null || cityCode == "") {
+            return false;
+        }
+        $.get("/three", {"cityCode": cityCode}, function (result) {
+            $.each(result, function (index, item) {
+                var row = "<option id='" + item.code + "'>" + item.name + "</option>"
+                $("#sel3").append(row)
+            })
+        })
+
+    })
+    function showImg() {
+        // var img_file =  $("#img_file").val();
+        var file = document.getElementById('userAvatar').files[0];
+        var re = new FileReader();
+        re.readAsDataURL(file);
+        re.onload = function (re) {
+            $('#img_id').attr("src", re.target.result);
+        }
+    }
+</script>
+</html>

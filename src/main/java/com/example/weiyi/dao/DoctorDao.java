@@ -18,4 +18,7 @@ public interface DoctorDao extends JpaRepository<Doctor,Long> {
     @Query("select d from Doctor d where d.hospital=:hospital")
     Page<Doctor> findByHospital(Hospital hospital, Pageable pageable);
 
+    @Query("select d from Doctor d where d.Dtel=:Dtel and d.pwd=:pwd")
+    Doctor findByDtelAndPwd(String Dtel,String pwd);
+
 }

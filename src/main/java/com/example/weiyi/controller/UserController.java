@@ -35,10 +35,6 @@ public class UserController {
     }
 
 
-    @GetMapping("/s")
-    public String s(){
-        return "s";
-    }
 
     @GetMapping("/one")
     @ResponseBody

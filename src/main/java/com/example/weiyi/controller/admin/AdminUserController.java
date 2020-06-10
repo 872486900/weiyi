@@ -27,10 +27,10 @@ public class AdminUserController {
         model.addAttribute("users",users);
         return "admin/user_list";
     }
-    @ResponseBody
     @RequestMapping("/user_del/{usid}")
     public String deleteUser(@PathVariable Long usid){
         userService.delete(usid);
-        return null;
+        System.out.println(usid);
+       return "redirect:/admin/user_list";
     }
 }

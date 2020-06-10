@@ -31,4 +31,9 @@ public class HospitalServiceImpl implements HospitalService {
     public Hospital findByHid(Long Hid) {
         return hospitalDao.findByHid(Hid);
     }
+
+    @Override
+    public void delHospital(Long hid) {
+        hospitalDao.deleteById(hid);
+    }
 }

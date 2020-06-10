@@ -97,7 +97,7 @@
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
-                <a title="删除" href="javascript:;" onclick="user_del(this,'1')"
+                <a title="删除" href="javascript:;" th:onclick="user_del('this',[[${user.usid}]])"
                    style="text-decoration:none" v>
                     <i class="layui-icon">&#xe640;</i>
                 </a>
@@ -203,8 +203,13 @@
     function user_del(obj, id) {
         layer.confirm('确认要删除吗？', function (index) {
             //发异步删除数据
-            $(obj).parents("tr").remove();
+            $.ajax({
+                url:'/admin/user_del/'+id,
+                success:function (re) {
+                    window.location.reload(true);
 
+                }
+            })
 
             layer.msg('已删除!', {icon: 1, time: 3000});
         });
