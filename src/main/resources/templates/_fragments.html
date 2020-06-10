@@ -18,7 +18,7 @@
     <div id="top" class="bg-lightgray width-whole">
         <div class="width-main center">
             <div id="top-doc" class="text-darkgray pull-left"><a class="a-normal text-lightblue" href="#">医生端</a></div>
-            <div id="top-back" class="text-darkgray pull-left"><a class="a-normal text-lightblue" href="#">后台管理</a>
+            <div id="top-back" class="text-darkgray pull-left"><a class="a-normal text-lightblue" href="/admin/">后台管理</a>
             </div>
             <div th:if="${session.user==null}">
                 <div class="pull-right">&nbsp;<a th:href="@{/register}" class="a-normal text-lightblue">注册</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

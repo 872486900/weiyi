@@ -30,4 +30,9 @@ public class UserSerivceImpl implements UserService {
     public User userLogin(String tel, String pwd) {
         return userDao.findByTelAndPwd(tel,pwd);
     }
+
+    @Override
+    public void delete(Long usid) {
+        userDao.deleteById(usid);
+    }
 }

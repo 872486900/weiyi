@@ -11,4 +11,5 @@ public interface UserService {
     List<User> findAll();
     User userRegister(User user);
     User userLogin(String tel,String pwd);
+    void delete(Long usid);
 }

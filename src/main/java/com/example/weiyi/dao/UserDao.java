@@ -9,4 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface UserDao extends JpaRepository<User,Long> {
     //登录
     User findByTelAndPwd(String tel,String pwd);
+
 }
