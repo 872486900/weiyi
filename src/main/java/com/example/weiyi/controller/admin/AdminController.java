@@ -85,11 +85,13 @@ public class AdminController {
     public String addAdmin(){
         return "admin/admin_add";
     }
+    @ResponseBody
     @PostMapping("/admin_add")
     public String addAdmin(Admin admin){
         Admin admin1 = adminService.savaAdmin(admin);
         System.out.println(admin);
-        return "admin/login";
+
+        return "添加成功";
     }
 
 

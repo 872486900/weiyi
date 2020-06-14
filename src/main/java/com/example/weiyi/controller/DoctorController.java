@@ -2,11 +2,9 @@ package com.example.weiyi.controller;
 
 import com.example.weiyi.entity.Doctor;
 import com.example.weiyi.entity.Hospital;
+import com.example.weiyi.entity.Order;
 import com.example.weiyi.entity.Type;
-import com.example.weiyi.service.AddressService;
-import com.example.weiyi.service.DoctorService;
-import com.example.weiyi.service.HospitalService;
-import com.example.weiyi.service.TypeService;
+import com.example.weiyi.service.*;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.print.Doc;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -36,6 +35,8 @@ public class DoctorController {
     private AddressService addressService;
     @Autowired
     private HospitalService hospitalService;
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping("doctor/login")
     public String docotr(){
@@ -76,10 +77,17 @@ public class DoctorController {
         String area = request.getParameter("area");
         String address = province + "/" + city + "/" + area;
         doctor.setDaddress(address);
+        String dphoto = "/images/"+request.getParameter("dphoto");
+        doctor.setDphoto(dphoto);
         doctorService.doctorRegister(doctor);
         System.out.println("注册成功，请登录");
         model.addAttribute("message","注册成功，请登录");
         return "doctor/login";
+    }
+    @GetMapping("doctor/logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("doctor");
+        return "redirect:/";
     }
 
     @RequestMapping("/doctor/{did}")
@@ -143,7 +151,13 @@ public class DoctorController {
     }
 
     @GetMapping("doctor/about")
-    public String about(Model model){
+    public String about(Model model,HttpSession session){
+        Doctor doctor = (Doctor) session.getAttribute("doctor");
+        Long did = doctor.getDid();
+        System.out.println(did);
+        Doctor doctor1 = doctorService.findByDid(did);
+        model.addAttribute("doctor",doctor1);
+        System.out.println(doctor1);
         model.addAttribute("hospitals",hospitalService.findAll());
         model.addAttribute("types",typeService.findAll());
         return "doctor/about";
@@ -160,7 +174,15 @@ public class DoctorController {
         doctor.setHospital(hospitalService.findByHid(hid));
         doctor.setType(typeService.findOne(tid));
         Doctor doctor1 = doctorService.updateDoctor(did, doctor);
-        System.out.println(doctor1);
         return "redirect:/doctor/about";
+    }
+
+    @GetMapping("doctor/order_list")
+    public String order(Model model,
+                        HttpSession session){
+        Doctor doctor = (Doctor) session.getAttribute("doctor");
+        List<Order> orders = orderService.findbyDoctor(doctor);
+        model.addAttribute("orders",orders);
+        return "doctor/order_list";
     }
 }

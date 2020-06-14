@@ -41,7 +41,7 @@
                             名字：
                         </label>
                         <div class="layui-input-block">
-                            <input type="text" readonly th:value="${session.doctor.dname}" class="layui-input">
+                            <input type="text" readonly th:value="${doctor.dname}" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -49,7 +49,7 @@
                             性别：
                         </label>
                         <div class="layui-input-block">
-                            <input type="text" readonly th:value="${session.doctor.sex}"
+                            <input type="text" readonly th:value="${doctor.sex}"
                                    class="layui-input">
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                             电话：
                         </label>
                         <div class="layui-input-block">
-                            <input type="text" readonly th:value="${session.doctor.dtel}"
+                            <input type="text" readonly th:value="${doctor.dtel}"
                                    class="layui-input">
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                             居住地：
                         </label>
                         <div class="layui-input-block">
-                            <input type="text" readonly th:value="${session.doctor.daddress}"
+                            <input type="text" readonly th:value="${doctor.daddress}"
                                    class="layui-input">
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                             身份证件：
                         </label>
                         <div class="layui-input-block">
-                            <input type="text" readonly th:value="${session.doctor.cardtype}"
+                            <input type="text" readonly th:value="${doctor.cardtype}"
                                    class="layui-input">
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                             证件号码:
                         </label>
                         <div class="layui-input-block">
-                            <input type="text" readonly th:value="${session.doctor.cardid}"
+                            <input type="text" readonly th:value="${doctor.cardid}"
                                    class="layui-input">
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                         </label>
                         <div class="layui-input-block">
                             <input type="text" readonly
-                                   th:value="${session.doctor.hospital}!=null?${session.doctor.hospital.hname}:'为认证，请进行认证'"
+                                   th:value="${doctor.hospital}!=null?${doctor.hospital.hname}:'为认证，请进行认证'"
                                    class="layui-input">
                         </div>
                     </div>
@@ -104,60 +104,125 @@
             </div>
             <div class="layui-tab-item">
 
-                <form class="layui-form layui-form-pane" action="" th:action="@{/doctor/update/{did}(did=${session.doctor.did})}" method="post">
-                    <input type="hidden" th:value="${session.doctor.did}" name="did">
-                    <input type="hidden" th:value="${session.doctor.hospital.hid}" name="hid">
-                    <input type="hidden" th:value="${session.doctor.type.tid}" name="tid">
-                    <div class="layui-form-item" th:if="${session.doctor.hospital}==null">
+                <form class="layui-form layui-form-pane" action=""
+                      th:action="@{/doctor/update/{did}(did=${session.doctor.did})}" method="post">
+                    <input type="hidden" th:value="${doctor.did}" name="did">
+                    <input type="hidden" th:value="${doctor.hospital.hid}" name="hid"
+                           th:if="${session.doctor.hospital}!=null">
+                    <input type="hidden" th:value="${doctor.type.tid}" name="tid"
+                           th:if="${doctor.hospital}!=null">
+                    <div class="layui-form-item" th:if="${doctor.hospital}==null">
                         <label class="layui-form-label">选择医院</label>
                         <div class="layui-input-inline">
-                            <select id="sel1"   >
+                            <select id="sel1">
                                 <option>选择省份</option>
                             </select>
                         </div>
                         <div class="layui-input-inline">
-                            <select id="sel2" class="form-control" ><option>选择城市</option><option id="440100">广州市</option><option id="440200">韶关市</option><option id="440300">深圳市</option><option id="440400">珠海市</option><option id="440500">汕头市</option><option id="440600">佛山市</option><option id="440700">江门市</option><option id="440800">湛江市</option><option id="440900">茂名市</option><option id="441200">肇庆市</option><option id="441300">惠州市</option><option id="441400">梅州市</option><option id="441500">汕尾市</option><option id="441600">河源市</option><option id="441700">阳江市</option><option id="441800">清远市</option><option id="441900">东莞市</option><option id="442000">中山市</option><option id="445100">潮州市</option><option id="445200">揭阳市</option><option id="445300">云浮市</option></select>
+                            <select id="sel2" class="form-control">
+                                <option>选择城市</option>
+                                <option id="440100">广州市</option>
+                                <option id="440200">韶关市</option>
+                                <option id="440300">深圳市</option>
+                                <option id="440400">珠海市</option>
+                                <option id="440500">汕头市</option>
+                                <option id="440600">佛山市</option>
+                                <option id="440700">江门市</option>
+                                <option id="440800">湛江市</option>
+                                <option id="440900">茂名市</option>
+                                <option id="441200">肇庆市</option>
+                                <option id="441300">惠州市</option>
+                                <option id="441400">梅州市</option>
+                                <option id="441500">汕尾市</option>
+                                <option id="441600">河源市</option>
+                                <option id="441700">阳江市</option>
+                                <option id="441800">清远市</option>
+                                <option id="441900">东莞市</option>
+                                <option id="442000">中山市</option>
+                                <option id="445100">潮州市</option>
+                                <option id="445200">揭阳市</option>
+                                <option id="445300">云浮市</option>
+                            </select>
                         </div>
                         <div class="layui-input-inline">
-                            <select id="sel3" name="hid"><option>选择医院</option><option value="1">中山大学附属第三医院天河院区</option><option value="2">南方医科大学南方医院</option><option value="3">广东省中医院大德路总院</option><option value="4">南方医科大学珠江医院</option></select>
+                            <select id="sel3" name="hid">
+                                <option>选择医院</option>
+                                <option value="1">中山大学附属第三医院天河院区</option>
+                                <option value="2">南方医科大学南方医院</option>
+                                <option value="3">广东省中医院大德路总院</option>
+                                <option value="4">南方医科大学珠江医院</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="layui-form-item" th:if="${session.doctor.hospital}==null">
+                    <div class="layui-form-item" th:if="${doctor.hospital}==null">
                         <label class="layui-form-label">选择科室</label>
                         <div class="layui-input-inline">
-                            <select lay-verify="required" name="tid" >
+                            <select lay-verify="required" name="tid">
                                 <option>选择科室</option>
                                 <option th:each="type:${types}" th:value="${type.tid}">[[${type.tname}]]</option>
                                 <option value=""></option>
                             </select>
                         </div>
                     </div>
-                    <div class="layui-form-item" th:if="${session.doctor.hospital}!=null">
+                    <div class="layui-form-item" th:if="${doctor.hospital}!=null">
                         <label class="layui-form-label">医院：</label>
                         <div class="layui-input-block">
-                            <input type="text" readonly th:value="${session.doctor.hospital.hname}"  class="layui-input">
+                            <input type="text" readonly th:value="${doctor.hospital.hname}" class="layui-input">
                         </div>
                     </div>
-                    <div class="layui-form-item" th:if="${session.doctor.hospital}!=null">
+                    <div class="layui-form-item" th:if="${doctor.hospital}!=null">
                         <label class="layui-form-label">科室：</label>
                         <div class="layui-input-block">
-                            <input type="text" readonly th:value="${session.doctor.type.tname}"  class="layui-input">
+                            <input type="text" readonly th:value="${doctor.type.tname}" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">擅长：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="Dgood" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input" th:value="${session.doctor.dgood}">
+                            <input type="text" name="Dgood" lay-verify="title" autocomplete="off" placeholder="请输入"
+                                   class="layui-input" th:value="${doctor.dgood}">
                         </div>
                     </div>
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">简介：</label>
                         <div class="layui-input-block">
-                            <textarea  placeholder="请输入内容" name="Dintroduction" class="layui-textarea" th:text="${session.doctor.dintroduction}"></textarea>
+                            <textarea placeholder="请输入内容" name="Dintroduction" class="layui-textarea"
+                                      th:text="${doctor.dintroduction}"></textarea>
                         </div>
                     </div>
-
                     <input type="submit" value="保存" style="width: 100px;height: 40px;background-color: #5cb85c">
+                </form>
+            </div>
+            <div class="layui-form layui-form-pane layui-tab-item">
+                <form class="layui-form layui-form-pane" action=""
+                      th:action="@{/doctor/update/{did}(did=${session.doctor.did})}" method="post">
+                    <input type="hidden" th:value="${doctor.did}" name="did">
+                    <input type="hidden" th:value="${doctor.hospital.hid}" name="hid"
+                           th:if="${session.doctor.hospital}!=null">
+                    <input type="hidden" th:value="${doctor.type.tid}" name="tid"
+                           th:if="${doctor.hospital}!=null">
+                    <div class="layui-form-item">
+                        <label for="L_nowpass" class="layui-form-label">当前密码</label>
+                        <div class="layui-input-inline">
+                            <input type="password" id="L_nowpass" name="nowpass" required lay-verify="required" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="L_pass" class="layui-form-label">新密码</label>
+                        <div class="layui-input-inline">
+                            <input type="password" id="L_pass" name="pwd" required lay-verify="required" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">6到16个字符</div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="L_repass" class="layui-form-label">确认密码</label>
+                        <div class="layui-input-inline">
+                            <input type="password" id="L_repass" name="repass" required lay-verify="required" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <button class="layui-btn" key="set-mine" lay-filter="*" lay-submit>确认修改</button>
+                    </div>
                 </form>
             </div>
         </div>

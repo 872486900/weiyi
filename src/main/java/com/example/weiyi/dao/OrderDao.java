@@ -1,5 +1,6 @@
 package com.example.weiyi.dao;
 
+import com.example.weiyi.entity.Doctor;
 import com.example.weiyi.entity.Order;
 import com.example.weiyi.entity.User;
 import org.aspectj.weaver.ast.Or;
@@ -13,5 +14,7 @@ import java.util.List;
 public interface OrderDao extends JpaRepository<Order,Long> {
 
     List<Order> findByUser(User user);
+
+    List<Order> findByDoctor(Doctor doctor);
 
 }

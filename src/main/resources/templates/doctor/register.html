@@ -27,9 +27,9 @@
 
 <div id="third" class="width-main center">
     <div class="navi bg-lightgray">
-        <div class="bg-darkblue navi-item text-white text-center" ><a href="/doctor/login"> 医生登录</a></div>
+        <div class="bg-darkblue navi-item text-white text-center"><a href="/doctor/login"> 医生登录</a></div>
         <div class="bg-darkblue navi-item text-white text-center" style="width: 20px">|</div>
-        <div class="bg-darkblue navi-item text-white text-center" ><a href="/doctor/register"> 医生注册</a></div>
+        <div class="bg-darkblue navi-item text-white text-center"><a href="/doctor/register"> 医生注册</a></div>
     </div>
     <!--提示-->
     <div class="modal-dialog" role="document">
@@ -42,7 +42,7 @@
             </div>
         </div>
     </div>
-    <form id="form" class="center form-horizontal"  method="post">
+    <form id="form" class="center form-horizontal" method="post">
         <h2>医生注册</h2>
         <hr>
         <div class="form-group">
@@ -102,13 +102,14 @@
             <label class="col-lg-3 control-label">现居住地：</label>
             <div id="address" class="form-inline col-lg-9">
                 <select id="sel1" class="form-control" name="province">
-                <option>选择省份</option>
+                    <option>选择省份</option>
                 </select>
                 <select id="sel2" class="form-control" name="city">
-                <option>选择城市</option>
+                    <option>选择城市</option>
                 </select>
                 <select id="sel3" class="form-control" name="area">
-                <option>选择区镇</option>
+                    <option>选择区镇</option>
+                </select>
             </div>
         </div>
         <div class="form-group">
@@ -120,10 +121,10 @@
         <div class="form-group">
             <label class="col-lg-3 control-label">照片：</label>
             <div class="col-lg-3">
-                <input type="file" class="form-control" name="Dphoto" onchange="showImg()" id="userAvatar">
+                <input type="file" class="form-control" name="dphoto" onchange="showImg()" id="userAvatar">
             </div>
             <div class="col-lg-3">
-                <img  alt="" id="img_id" style="width: 100px" >
+                <img alt="" id="img_id" style="width: 100px">
             </div>
         </div>
         <!--            <div class="form-group">
@@ -186,6 +187,7 @@
         })
 
     })
+
     function showImg() {
         // var img_file =  $("#img_file").val();
         var file = document.getElementById('userAvatar').files[0];

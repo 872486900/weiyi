@@ -28,8 +28,7 @@
 
     <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
-        <button class="layui-btn" onclick="admin_add('添加管理员','admin_add','600','500')"><i class="layui-icon">&#xe608;</i>添加</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+        <span class="x-right" style="line-height:40px">共有数据：<span th:text="${orders.size()}"></span> 条</span></xblock>
     <table class="layui-table">
         <thead>
         <tr>
@@ -40,13 +39,25 @@
                 编号
             </th>
             <th>
-                账号
+                用户姓名
             </th>
             <th>
-                管理员名字
+                性别
             </th>
             <th>
-                最近登录
+                联系方式
+            </th>
+            <th>
+                是否就医
+            </th>
+            <th>
+                患病时长
+            </th>
+            <th>
+                病情描述
+            </th>
+            <th>
+                就诊日期
             </th>
             <th>
                 操作
@@ -54,21 +65,33 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="admin:${admins}">
+        <tr th:each="order:${orders}">
             <th>
                 <input type="checkbox" name="" value="">
             </th>
-            <th th:text="${admin.aid}">
+            <th th:text="${order.oid}">
                 编号
             </th>
-            <th th:text="${admin.atel}">
-                账号
+            <th th:text="${order.user.uname}">
+                用户姓名
             </th>
-            <th th:text="${admin.aname}">
-                管理员名字
+            <th th:text="${order.user.sex}">
+                性别
             </th>
-            <th th:text="${admin.adate}!=null?${admin.adate}:'未登录过'">
-                最近登录
+            <th th:text="${order.user.tel}">
+                联系方式
+            </th>
+            <th th:text="${order.ojy}">
+                是否就医
+            </th>
+            <th th:text="${order.otime}">
+                患病时长
+            </th>
+            <th th:text="${order.ointroduction}" style="width: 200px">
+                病情描述
+            </th>
+            <th th:text="${order.date}">
+                就诊日期
             </th>
 
             <td class="td-manage">

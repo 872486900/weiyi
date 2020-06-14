@@ -13,4 +13,5 @@ public interface HospitalService {
     List<Hospital> findAll();
     Hospital findByHid(Long Hid);
     void delHospital(Long hid);
+    Hospital savaHospital(Hospital hospital);
 }

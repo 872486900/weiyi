@@ -28,7 +28,7 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;" th:text="${session.doctor.dname}" style="color: white">admin</a>
                     <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                        <dd><a href="/admin/logout">退出</a></dd>
+                        <dd><a href="/doctor/logout">退出</a></dd>
                     </dl>
                 </li>
                 <!-- <li class="layui-nav-item">
@@ -50,11 +50,6 @@
                     <dl class="layui-nav-child">
                         <dd class="">
                             <a href="javascript:;" _href="/doctor/about">
-                                <cite>我的</cite>
-                            </a>
-                        </dd>
-                        <dd class="">
-                            <a href="javascript:;" _href="/admin/user_list">
                                 <cite>我的信息</cite>
                             </a>
                         </dd>
@@ -66,7 +61,7 @@
                     </a>
                     <dl class="layui-nav-child">
                         <dd class="">
-                            <a href="javascript:;" _href="/admin/doctor_list">
+                            <a href="javascript:;" _href="/doctor/order_list">
                                 <cite>预约列表</cite>
                             </a>
                         </dd>

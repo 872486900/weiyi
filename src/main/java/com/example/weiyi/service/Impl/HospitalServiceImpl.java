@@ -36,4 +36,9 @@ public class HospitalServiceImpl implements HospitalService {
     public void delHospital(Long hid) {
         hospitalDao.deleteById(hid);
     }
+
+    @Override
+    public Hospital savaHospital(Hospital hospital) {
+        return hospitalDao.save(hospital);
+    }
 }

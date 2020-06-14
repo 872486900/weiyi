@@ -1,6 +1,7 @@
 package com.example.weiyi.service.Impl;
 
 import com.example.weiyi.dao.OrderDao;
+import com.example.weiyi.entity.Doctor;
 import com.example.weiyi.entity.Order;
 import com.example.weiyi.entity.User;
 import com.example.weiyi.service.OrderService;
@@ -25,5 +26,15 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> findByUser(User user) {
         return orderDao.findByUser(user);
+    }
+
+    @Override
+    public List<Order> findbyDoctor(Doctor doctor) {
+        return orderDao.findByDoctor(doctor);
+    }
+
+    @Override
+    public List<Order> findAll() {
+        return orderDao.findAll();
     }
 }

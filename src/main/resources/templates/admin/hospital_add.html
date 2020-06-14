@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>
+        后台管理
+    </title>
+    <script src="/js/JQuery.js"></script>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="/css/x-admin.css" media="all">
+</head>
+
+<body>
+<div class="x-body">
+    <form class="layui-form" th:action="@{/admin/hospital_add}" method="post">
+        <div class="layui-form-item">
+            <label class="layui-form-label">选择省市</label>
+            <div class="layui-input-inline">
+                <select id="sel1">
+                    <option>选择省份</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select id="sel2" class="form-control" name="cityCode">
+                    <option>选择城市</option>
+                    <option id="440100">广州市</option>
+                    <option id="440200">韶关市</option>
+                    <option id="440300">深圳市</option>
+                    <option id="440400">珠海市</option>
+                    <option id="440500">汕头市</option>
+                    <option id="440600">佛山市</option>
+                    <option id="440700">江门市</option>
+                    <option id="440800">湛江市</option>
+                    <option id="440900">茂名市</option>
+                    <option id="441200">肇庆市</option>
+                    <option id="441300">惠州市</option>
+                    <option id="441400">梅州市</option>
+                    <option id="441500">汕尾市</option>
+                    <option id="441600">河源市</option>
+                    <option id="441700">阳江市</option>
+                    <option id="441800">清远市</option>
+                    <option id="441900">东莞市</option>
+                    <option id="442000">中山市</option>
+                    <option id="445100">潮州市</option>
+                    <option id="445200">揭阳市</option>
+                    <option id="445300">云浮市</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">医院名字</label>
+            <div class="layui-input-block">
+                <input type="text" name="hname" required  lay-verify="required"  autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选择级别</label>
+            <div class="layui-input-block">
+                <select lay-verify="required" name="Hlevel">
+                    <option value=""></option>
+                    <option value="三级甲等">三级甲等</option>
+                    <option value="三级医院">三级医院</option>
+                    <option value="二级医院">二级医院</option>
+                    <option value="一级医院">一级医院</option>
+                    <option value="无">无</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">联系电话</label>
+            <div class="layui-input-block">
+                <input type="text" name="Htel" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">详细地址</label>
+            <div class="layui-input-block">
+                <input type="text" name="Haddress" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">简介</label>
+            <div class="layui-input-block">
+                <textarea  placeholder="请输入内容" class="layui-textarea" name="Hintroduction"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">上传图片</label>
+            <input type="file" class="layui-btn" id="test1" name="hphoto">
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <button  class="layui-btn" lay-filter="add" lay-submit="">
+                保存
+            </button>
+        </div>
+
+    </form>
+
+</div>
+<script src="/lib/layui/layui.js" charset="utf-8">
+</script>
+<script src="/js/x-layui.js" charset="utf-8">
+</script>
+<script type="text/javascript">
+    $(function () {   //页面加载执行ajax封装的get请求方法调用省级查询全部
+        $.get("/one", function (reult) {
+            $.each(reult, function (index, item) {
+                var row = "<option id='" + item.code + "'>" + item.name + "</option>"    //把返回结果的省级对象的编号code作为id值，name作为文本值
+                $("#sel1").append(row)
+            })
+        })
+    })
+    $("#sel1").change(function () {  //省级下拉框选项改变时触发，先清空市区级下拉框
+        $("#sel2").empty();
+        $("#sel2").append("<option>请选择</option>")
+        $("#sel3").empty();
+        $("#sel3").append("<option>请选择</option>")
+        var provinceCode = $(this).find("option:checked").attr("id");  //取省级的id值，即省级的code编号
+        if (provinceCode == null || provinceCode == "") {
+            return false;
+        }
+        $.get("/two", {"provinceCode": provinceCode}, function (result) {   //使用$.get()方法走查询省对应的市级，把省级的code作为参数传过去
+            $.each(result, function (index, item) {
+                var row = "<option id='" + item.code + "'>" + item.name + "</option>"  //同样把返回结果的市级对象的编号code作为id值，name作为文本值
+                $("#sel2").append(row)
+            })
+        })
+
+    })
+    $("#sel2").change(function () {  //当市级下拉框改变时，触发的事件，与上面的无异
+        $("#sel3").empty();
+        $("#sel3").append("<option>请选择</option>")
+        var cityCode = $(this).find("option:checked").attr("id");
+        if (cityCode == null || cityCode == "") {
+            return false;
+        }
+        $.get("/four", {"cityCode": cityCode}, function (result) {
+            $.each(result, function (index, item) {
+                var row = "<option id='" + item.hid + "'>" + item.hname + "</option>"  //同样把返回结果的市级对象的编号code作为id值，name作为文本值
+
+                $("#sel3").append(row)
+            })
+        })
+
+    })
+</script>
+<script>
+    layui.use(['form', 'layer'], function () {
+        $ = layui.jquery;
+        var form = layui.form()
+            , layer = layui.layer;
+
+        //自定义验证规则
+        form.verify({
+            nikename: function (value) {
+                if (value.length < 5) {
+                    return '昵称至少得5个字符啊';
+                }
+            }
+            , pass: [/(.+){6,12}$/, '密码必须6到12位']
+            , repass: function (value) {
+                if ($('#L_pass').val() != $('#L_repass').val()) {
+                    return '两次密码不一致';
+                }
+            }
+        });
+
+        //监听提交
+        form.on('submit(/hospital_add)', function (data) {
+            console.log(data);
+            //发异步，把数据提交给php
+            layer.alert("增加成功", {icon: 6}, function () {
+                // 获得frame索引
+                var index = parent.layer.getFrameIndex(window.name);
+                //关闭当前frame
+                parent.layer.close(index);
+            });
+            return false;
+        });
+
+
+    });
+</script>
+</body>
+
+</html>

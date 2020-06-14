@@ -22,7 +22,7 @@
                         后台管理
                     </a>
                     <ul class="layui-nav" lay-filter="">
-                      <li class="layui-nav-item"><img src="/images/admin.jpg" class="layui-circle" style="border: 2px solid #A9B7B7;" width="35px" alt=""></li>
+                      <li class="layui-nav-item"><img src="/images/admin.png" class="layui-circle" style="border: 2px solid #A9B7B7;" width="35px" alt=""></li>
                       <li class="layui-nav-item">
                         <a href="javascript:;" th:text="${session.admin.aname}">admin</a>
                         <dl class="layui-nav-child"> <!-- 二级菜单 -->
@@ -75,6 +75,20 @@
                                 </dd>
                             </dl>
                         </li>
+                        <li class="layui-nav-item">
+                            <a class="javascript:;" href="javascript:;">
+                                <i class="layui-icon" style="top: 3px;">&#xe642;</i><cite>订单管理</cite>
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dd class="">
+                                <dd class="">
+                                    <a href="javascript:;" _href="/admin/order_list">
+                                        <cite>预约列表</cite>
+                                    </a>
+                                </dd>
+                                </dd>
+                            </dl>
+                        </li>
 
                         <li class="layui-nav-item">
                             <a class="javascript:;" href="javascript:;">
@@ -103,8 +117,6 @@
                                     </a>
                                 </dd>
                             </dl>
-                        </li>
-                        <li class="layui-nav-item" style="height: 30px; text-align: center">
                         </li>
                     </ul>
                 </div>
