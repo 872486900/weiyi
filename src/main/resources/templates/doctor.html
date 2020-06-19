@@ -49,8 +49,8 @@
                     </a>
                 </div>
                 <div style="float: left;padding: 5px">
-                    <a th:href="@{/zaixian}" class="left">
-                        <button class="btn btn-primary" type="button">图文问诊</button>
+                    <a th:href="@{/zaixian/{did}(did=${doctor.did})}" class="left">
+                        <button class="btn btn-primary" type="button">在线问诊</button>
                     </a>
                 </div>
                 <div style="float: left;padding: 5px">

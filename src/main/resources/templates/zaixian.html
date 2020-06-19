@@ -1,34 +1,44 @@
 <html lang="zh">
-<head>
-    <meta charset="utf-8">
-    <base target="_blank">
-    <title>在线问诊</title>
-    <link rel="stylesheet" href="/css/zaixian.css">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<base target="_blank">
+<title>在线问诊</title>
+<link rel="stylesheet" href="/css/zaixian.css">
 </head>
 <body lang="zh">
 <div class="abs cover contaniner">
     <div class="abs cover pnl">
-        <div class="top pnl-head" style="background-color: #0C0C0C"></div>
+        <div class="top pnl-head" style="background-image: url(2.jpg);">
+            <a href="" th:href="@{/}"><p style="background-color: rgb(32, 196, 202);
+            color: rgb(255, 255, 255);
+                width: 50px;
+                height: 45px;
+                font-size: 20px;
+                    ">返回</p></a>
+
+        </div>
         <div class="abs cover pnl-body" id="pnlBody">
             <div class="abs cover pnl-left">
-                <div class="abs cover pnl-msgs scroll" id="show">
+                <div class="abs cover pnl-msgs scroll" id="father">
                     <div class="msg min time" id="histStart">加载历史消息</div>
                     <div class="pnl-list" id="hists">
                         <!-- 历史消息 -->
                     </div>
                     <div class="pnl-list" id="msgs">
                         <div class="msg robot">
-                            <div class="msg-left" id="welcomeLeft" worker="用户">
-                                <div class="msg-host photo" id="welcomeIcon"></div>
-                                <div class="msg-ball" id="welcomeBall"><span>你好，我是只能打字的聊天机器人<br><br>您是想要了解哪些方面呢？</span></div>
+                            <div class="msg-left" id="welcomeLeft" worker="医生" th:worker="${doctor.dname}">
+                                <div class="msg-host photo" id="welcomeIcon">
+                                    <img src="" alt="" th:src="${doctor.dphoto}" style="width: 35px;height: 43px">
+                                </div>
+                                <div class="msg-ball" id="welcomeBall"><span>你好，有什么可以帮忙吗？</span></div>
                             </div>
                         </div>
                         <div class="msg guest">
-                            <div class="msg-right" customer="游客">
+                            <div class="msg-right" customer="游客" worker="s">
                                 <div class="msg-host">
                                     <i class="ic kh"></i>
                                 </div>
-                                <div class="msg-ball" title="今天 17:52:06">你好
+                                <div class="msg-ball" id="fa" title="今天 17:52:06">你好
                                 </div>
                             </div>
                         </div>
@@ -49,13 +59,12 @@
                         </div>
                     </div>
                     <div class="abs cover pnl-input">
-                        <textarea class="scroll" id="text" wrap="hard" placeholder="在此输入..."></textarea>
-                        <div class="abs atcom-pnl scroll hide" id="atcomPnl">
-                            <ul class="atcom" id="atcom">
-                            </ul>
-                        </div>
+                        <textarea class="scroll" id="txt" wrap="hard" placeholder="在此输入..."></textarea>
                     </div>
-                    <div class="abs br pnl-btn" id="submit" style="background-color: rgb(32, 196, 202); color: rgb(255, 255, 255);">发送</div>
+                    <div class="abs br pnl-btn" id="btn"
+                         style="background-color: rgb(32, 196, 202); color: rgb(255, 255, 255);">发送
+                    </div>
+
                 </div>
             </div>
             <div class="abs right pnl-right">
@@ -66,7 +75,17 @@
                     </div>
                     <div class="pnl-hot">
                         <ul class="rel-list unselect" id="hots">
-                            有什么问题吗
+                            <li>
+                                <p>1、医生开通图文问诊服务：您可通过文字/图片/语音进行问诊， 医生利用业余时间为您解答。</p>
+                            </li>
+                            <li>
+                                <p>2、医生开通视话问诊服务：在预约时间内，医生根据候诊顺序，通过电话、视讯与您进行沟通。</p>
+                            </li>
+                            <li>
+                                <p>3、医生的回复仅为建议，具体诊疗需前往医院进行。</p>
+                            </li>
+
+
                         </ul>
                     </div>
                 </div>
@@ -74,13 +93,47 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    var _hrefParam = _getHrefSearch(), ie = _getIeVersion(), phone = _hrefParam.dev == 'phone';
-    window.parent && window.parent !== window && (!ie || ie > 8) && (document.body.className += ' ifr');
-    phone && (document.body.className += ' phone');
+<script>
+    var btn = document.getElementById("btn");
+    var txt = document.getElementById("txt");
+    var father = document.getElementById("father")
+    var p = document.getElementsByTagName("p");
+    btn.onclick = function () {
+        if (txt.value == "") {
+            alert("请勿发送空内容");
+        } else {
+            var son = document.createElement("p");
+            son.style.backgroundColor = "#f0f0f0";
+            son.style.clear = "both";
+            son.style.float = "right";
+            son.style.marginRight = "5px";
+            son.innerText = txt.value;
+            father.appendChild(son);
+            txt.value = "";
+            son.scrollIntoView();
+        }
 
-    var scale = _hrefParam.scale;
-    scale && document.write('<meta name="viewport" content="width=device-width, initial-scale='+scale+', maximum-scale='+scale+', user-scalable=no">');
+    }
+    document.onkeydown = function (evt) {
+        var e = evt || event;
+        e.keyCode = e.which = e.charCode;
+        if (e.keyCode == 13 || e.keyCode == 10) {
+            if (txt.value == "") {
+                alert("请勿发送空内容");
+            } else {
+                var son = document.createElement("p");
+                son.style.backgroundColor = "#f0f0f0";
+                son.style.clear = "both";
+                son.style.float = "right";
+                son.style.marginRight = "5px";
+                son.innerText = txt.value;
+                father.appendChild(son);
+                txt.value = "";
+                son.scrollIntoView();
+            }
+        }
+    }
 </script>
+
 </body>
 </html>

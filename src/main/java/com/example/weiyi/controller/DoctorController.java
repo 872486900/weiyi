@@ -133,9 +133,11 @@ public class DoctorController {
         return "doctors";
     }
 
-    @GetMapping("zaixian")
-    public String zaixian()
+    @GetMapping("zaixian/{did}")
+    public String zaixian(Model model,
+                          @PathVariable Long did)
     {
+        model.addAttribute("doctor",doctorService.findByDid(did));
         return "zaixian";
     }
 
