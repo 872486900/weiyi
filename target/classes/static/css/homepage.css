@@ -1,0 +1,201 @@
+﻿#third{
+    margin-top: 30px;
+}
+#displaybox{
+    height: 414px;
+    display: flex;
+    justify-content:space-between;
+}
+#type-list-container {
+    padding: 15px 0;
+}
+#type-list {
+    width: 200px;
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    position: relative;
+}
+.type-item{
+    padding:10px 20px;
+    cursor:pointer;
+}
+.type-item:hover {
+    background-color: white;
+    color: #1FA4F0;
+}
+#type-detail {
+    width: 500px;
+    height: 400px;
+    position: absolute;
+    left:200px;
+    top:0;
+    z-index: 100;
+    box-shadow: 1px 1px 1px #bfbfbf;
+    display:none;
+    padding:40px;
+    background: url(../images/hover_bg.jpg);
+}
+
+#ad {
+    width: 544px;
+    height: 100%;
+}
+#hosinfo {
+    width: 250px;
+    height: 100%;
+    padding: 0 0 20px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+#hosinfo-title{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #1FA4F0;
+    color: white;
+}
+#hosinfo-img{
+    width: 230px;
+    height: 150px;
+}
+#hosinfo-msg{
+    text-align: left;
+    padding: 0 20px;
+}
+#hosinfo-hp{
+    width: 210px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#hosinfo-btn{
+    width: 200px;
+}
+#maparea{
+    height: 1000px;
+    width: 100%;
+}
+.modal-body {
+     padding: 0px;
+}
+#forth{
+    margin-top:30px;
+}
+
+.text-detail {
+    color: #808080;
+    font-size: 12px;
+    line-height: 30px;
+}
+
+.text-detail-title {
+    color: #4e4e4e;
+    font-size: 15px;
+}
+
+/*标题*/
+.top_left {
+	width: 600px;
+	height: 20px;
+	margin-left: 50px;
+	margin-top: 5px
+}
+
+.top_left img,.top_left .top_h2 {
+	float: left;
+}
+
+.top_left img {
+	height: 70px;
+	position: relative;
+}
+
+.top_h2{
+	font-size: 24px;
+}
+
+/*底部*/
+
+#foot {
+    text-align: center;
+    padding: 10px;
+
+}
+
+
+
+/* #banner 模块内界面 样式*/
+.banner-search {
+    background-color: #fafafa;
+}
+
+.banner-help .caption,
+.banner-search .caption{
+    height: 22px;
+    padding:15px 15px 25px 0;
+    text-align: center;
+}
+.banner-help .caption .text,
+.banner-search .caption .text{
+    display: inline-block;
+    height: 22px;
+    line-height: 22px;
+    padding-left: 28px;
+    color: #1FA4F0;
+    font-size: 16px;
+
+
+}
+.banner-search .form{
+    height: 150px;
+}
+.banner-search .form .line{
+    padding-bottom: 9px;
+    text-align: center;
+}
+.banner-search .form .line select{
+    width: 170px;
+    font-size: 12px;
+    z-index: 0;
+    border: 1px solid #dcdddd;
+    height: 26px;
+    line-height: 26px;
+    padding: 2px 0px;
+    color: #666;
+}
+.banner-search .submit{
+    height: 32px;
+    text-align: center;
+}
+.banner-search .submit .button{
+    width: 108px;
+    height: 33px;
+    background-color: #1FA4F0;
+    font-size: 14px;
+    color: #fff;
+    border-radius: 3px;
+}
+
+.banner-help{
+    background-color: #fafafa;
+}
+
+.banner-help .caption .text{
+    color: #00B3EA;
+    background-position: 0 -23px;
+}
+.banner-help .link{
+    color: #00B3EA;
+    display: inline-block;
+    width: 86px;
+    height: 26px;
+    text-align: center;
+    line-height: 26px;
+    font-size: 14px;
+    padding: 0 0 8px 26px;
+    /*float: left;*/
+}

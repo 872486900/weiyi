@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>惟医-登录</title>
+    <script src="/js/JQuery.js"></script>
+    <script src="/js/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link href="/js/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/color.css" rel="stylesheet"/>
+    <link href="/css/common.css" rel="stylesheet"/>
+    <link href="/css/global.css" rel="stylesheet"/>
+    <link href="/css/register.css" rel="stylesheet"/>
+    <link href="/js/bootstrap-fileinput/css/fileinput.css" rel="stylesheet"/>
+    <link href="/js/bootstrap-fileinput/css/fileinput-rtl.css" rel="stylesheet"/>
+    <script type="text/javascript" src="/js/jquery.webcam.js"></script>
+    <script src="/js/bootstrap-fileinput/js/fileinput.js"></script>
+    <script src="/js/bootstrap-fileinput/js/locales/zh.js"></script>
+
+    <link href="/css/homepage.css" rel="stylesheet"/>
+</head>
+<body>
+<!--导航-->
+<div th:replace="/doctor/_fragments::nav"></div>
+
+
+<!--//登录-->
+<div id="third" class="width-main center">
+    <div class="navi bg-lightgray">
+        <div class="bg-darkblue navi-item text-white text-center" ><a href="/doctor/login"> 医生登录</a></div>
+        <div class="bg-darkblue navi-item text-white text-center" style="width: 20px">|</div>
+        <div class="bg-darkblue navi-item text-white text-center" ><a href="/doctor/register"> 医生注册</a></div>
+    </div>
+    <div class="modal-container">
+        <div class="modal-dialog" role="document">
+            <!--提示-->
+            <div class="center" th:unless="${#strings.isEmpty(message)}">
+                <div  class="alert alert-warning alert-dange" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>提示：</strong>
+                    <p th:text="${message}"></p>
+                </div>
+            </div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                    <h4 class="modal-title" id="logintitle">医生登录</h4>
+                </div>
+                <br>
+                <br>
+                <div class="modal-body">
+                    <form id="loginform" th:action="@{/doctor/login}" method="post">
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">账号：</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" name="Dtel" placeholder="手机号/账号">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">密码：</label>
+                            <div class="col-lg-9">
+                                <input type="password" class="form-control" name="pwd" id="loginpwd" placeholder="请输入登录密码">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary">登录</button>
+                        </div>
+                    </form>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<div th:replace="_fragments::foot"></div>
+</body>
+</html>

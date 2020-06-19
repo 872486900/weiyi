@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>惟医</title>
+    <script src="/js/JQuery.js"></script>
+    <script src="/js/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="/js/global.js" th:src="@{/js/global.js}"></script>
+    <link href="/js/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/color.css" rel="stylesheet"/>
+    <link href="/css/common.css" rel="stylesheet"/>
+    <link href="/css/global.css" rel="stylesheet"/>
+    <script src="/js/doctor.js"></script>
+    <link href="/css/doctor.css" rel="stylesheet"/>
+    <script src="/js/laydate/laydate.js"></script>
+    <link href="/css/homepage.css" rel="stylesheet"/>
+    <script>
+        function myFunction(){
+            alert("未开通视频问诊！");
+        }
+    </script>
+</head>
+<body>
+<!--导航-->
+<div th:replace="_fragments::nav"></div>
+
+<div id="third" class="width-main center">
+    <div class="navi bg-lightgray">
+        <div class="bg-darkblue navi-item text-white text-center">医生</div>
+    </div>
+    <div id="doctorbox" class="bg-lightgray" th:each="doctor:${doctors}">
+        <div id="doctor-img">
+            <div class="img-box center">
+                <img src="/images/hosDoctor/no.jpg" class="img-circle" th:src="${doctor.dphoto}">
+            </div>
+        </div>
+        <div id="doctor-msg">
+            <h4 th:text="${doctor.dname}">刘凡</h4>
+            <p class="text-darkgray text-bigger" th:text="${doctor.hospital.hname}">医院</p>
+            <p class="text-darkgray text-bigger" th:text="${doctor.type.tname}">泌尿外科</p>
+            <p class="text-gray" th:text="'擅长：'+${doctor.dgood}">简介：擅长神经系统常见病、多发病、疑难病及重症肌无力的诊治。</p>
+        </div>
+        <div id="doctor-wenzhen">
+            <div class="row-fluid">
+                <div style="float: left;padding: 5px">
+                    <a th:href="@{/doctor/{did}(did=${doctor.did})}" class="left">
+                        <button class="btn btn-primary" type="button">查看详情</button>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+<hr>
+<hr>
+<hr>
+
+
+
+
+<div class="text-center pager">
+    <a href="#" class="a-normal text-blackgray">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="#" class="btn bg-lightblue text-white">1</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="#" class="a-normal text-blackgray">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    共<span class="page_total">1</span>页&nbsp;&nbsp;&nbsp;&nbsp;
+    到&nbsp;&nbsp;<input class="page_input" type="text"/>&nbsp;&nbsp;页&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="#" class="btn bg-lightblue text-white"><span class="glyphicon glyphicon-search"></span></a>
+</div>
+
+<div th:replace="_fragments::foot"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

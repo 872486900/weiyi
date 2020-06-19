@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>惟医</title>
+    <script src="/js/JQuery.js"></script>
+    <script src="/js/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <!--<script src="/js/global.js" ></script>-->
+    <link href="/js/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/color.css" rel="stylesheet"/>
+    <link href="/css/common.css" rel="stylesheet">
+    <link href="/css/global.css" rel="stylesheet"/>
+    <link href="/css/homepage.css" rel="stylesheet"/>
+    <script src="/js/homepage.js"></script>
+</head>
+<body>
+<div th:fragment="nav">
+    <div id="top" class="bg-lightgray width-whole">
+        <div class="width-main center">
+            <div id="top-doc" class="text-darkgray pull-left"><a class="a-normal text-lightblue" href="/doctor/login">医生端</a></div>
+            <div id="top-back" class="text-darkgray pull-left"><a class="a-normal text-lightblue" href="/admin/">后台管理</a>
+            </div>
+        </div>
+    </div>
+    <div id="subtop" class="width-main center">
+        <div class="top_left">
+            <a th:href="@{/}">
+                <img src="/images/login.png">
+                <h2 class="top_h2">惟医</h2>
+            </a>
+        </div>
+        <div id="searchbox" class="input-group pull-right">
+            <div class="input-group-btn">
+                <div class="btn-group">
+                    <button type="button" class="btn bg-yellow text-white dropdown-toggle" data-toggle="dropdown">
+                        <span id="search-btn-title">科室</span><span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a id="search-menu-ks" href="javascript:void(0)">科室</a></li>
+                        <li><a id="search-menu-jb" href="javascript:void(0)">疾病</a></li>
+                    </ul>
+                </div>
+            </div>
+            <input id="top-search" type="text" class="form-control"/>
+            <span class="input-group-btn">
+                <button id="search-btn" type="button" class="btn bg-yellow text-white">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+        </div>
+    </div>
+    <div id="navi" class="navi bg-lightblue width-whole">
+        <div class="width-main text-white center">
+            <div class="navi">
+                <div class="navi-item text-center"><a href="homepage.html" th:href="@{/}"
+                                                      class="a-normal text-white">首页</a>
+                </div>
+                <div class="navi-item text-center"><a href="guahao.html" th:href="@{/hospitals}"
+                                                      class="a-normal text-white">预约挂号</a>
+                </div>
+                <div class="navi-item text-center"><a href="wenzheng.html" th:href="@{/wenzheng}"
+                                                      class="a-normal text-white">在线问诊</a></div>
+                <div class="navi-item text-center"><a href="help.html" class="a-normal text-white" th:href="@{/baike}">疾病百科</a>
+                </div>
+                <div class="navi-item text-center"><a href="help.html" class="a-normal text-white" th:href="@{/baike}">健康科普</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div  th:fragment="foot">
+    <br><br><br><br><br><br><br><br><br><br>
+    <div id="foot" class="bg-darkblue text-white">
+        Copyright © 2020.3 - <span th:text="${#dates.year(#dates.createToday())}">2017</span>.<span th:text="${#dates.month(#dates.createToday())}">2017</span> Linzx Designed by Linzx
+
+    </div>
+</div>
+
+
+
+</body>
+</html>

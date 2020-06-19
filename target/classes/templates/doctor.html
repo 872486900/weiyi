@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>惟医</title>
+    <script src="/js/JQuery.js"></script>
+    <script src="/js/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="/js/global.js" th:src="@{/js/global.js}"></script>
+    <link href="/js/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/color.css" rel="stylesheet"/>
+    <link href="/css/common.css" rel="stylesheet"/>
+    <link href="/css/global.css" rel="stylesheet"/>
+    <script src="/js/doctor.js"></script>
+    <link href="/css/doctor.css" rel="stylesheet"/>
+    <script src="/js/laydate/laydate.js"></script>
+    <link href="/css/homepage.css" rel="stylesheet"/>
+    <script>
+        function myFunction(){
+            alert("未开通视频问诊！");
+        }
+    </script>
+</head>
+<body>
+<!--导航-->
+<div th:replace="_fragments::nav"></div>
+
+<div id="third" class="width-main center">
+    <div class="navi bg-lightgray">
+        <div class="bg-darkblue navi-item text-white text-center">医生</div>
+    </div>
+    <div id="doctorbox" class="bg-lightgray">
+        <div id="doctor-img">
+            <div class="img-box center">
+                <img src="/images/hosDoctor/no.jpg" class="img-circle" th:src="${doctor.dphoto}">
+            </div>
+        </div>
+        <div id="doctor-msg">
+            <h4 th:text="${doctor.dname}">刘凡</h4>
+            <p class="text-darkgray text-bigger" th:text="${doctor.hospital.hname}">医院</p>
+            <p class="text-darkgray text-bigger" th:text="${doctor.type.tname}">泌尿外科</p>
+            <p class="text-darkgray text-bigger" th:text="'擅长：'+${doctor.dgood}">泌尿外科</p>
+            <p class="text-gray" th:text="'简介：'+${doctor.dintroduction}">简介：擅长神经系统常见病、多发病、疑难病及重症肌无力的诊治。</p>
+        </div>
+        <div id="doctor-wenzhen">
+            <div class="row-fluid">
+                <div style="float: left;padding: 5px">
+                    <a th:href="@{/yuyue/{did}(did=${doctor.did})}" class="left">
+                        <button class="btn btn-primary" type="button">挂号</button>
+                    </a>
+                </div>
+                <div style="float: left;padding: 5px">
+                    <a th:href="@{/zaixian/{did}(did=${doctor.did})}" class="left">
+                        <button class="btn btn-primary" type="button">在线问诊</button>
+                    </a>
+                </div>
+                <div style="float: left;padding: 5px">
+                        <button class="btn btn-primary" type="button" id="shiping" onclick="myFunction()">视频问诊</button>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    <div id="schedubox" class="">
+        <div id="schedu-date"></div>
+        <div id="schedu-timebox">
+            <table border="1px" rules="all" width="90%" align="right">
+                <thead>
+                <tr>
+                    <th width="30%">时间</th>
+                    <th width="30%">价格</th>
+                    <th width="30%">预约</th>
+                </tr>
+                </thead>
+                <tbody id="schedu-tbody">
+                <tr id="tr-sw">
+                    <td>上午</td>
+                    <td th:text="${doctor.dfei}">21</td>
+                    <td>
+                        <button id="btn-sw" type="button" class="btn btn-sm bg-lightblue text-white"><span
+                                class="glyphicon glyphicon-plus-sign"></span> 一键预约
+                        </button>
+                    </td>
+                </tr>
+                <tr id="tr-xw">
+                    <td>下午</td>
+                    <td th:text="${doctor.dfei}">21</td>
+                    <td>
+                        <button type="button" class="btn btn-sm bg-lightblue text-white"><span
+                                class="glyphicon glyphicon-plus-sign"></span> 一键预约
+                        </button>
+                    </td>
+                </tr>
+                <tr id="tr-ws">
+                    <td>晚上</td>
+                    <td th:text="${doctor.dfei}">21</td>
+                    <td>
+                        <button  type="button" class="btn btn-sm bg-lightblue text-white"><span
+                                class="glyphicon glyphicon-plus-sign"></span> 一键预约
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+
+<div id="forth" class="width-main center">
+    <div class="navi bg-lightgray">
+        <div id="title-forth" class="bg-darkblue navi-item text-white text-center" th:text="${doctor.type.tname}+'-其他专家'">其他专家</div>
+    </div>
+    <!--医生-->
+    <div id="doctors" class="docter-list">
+        <div class="doctor-item" th:each="doctors,iterStat: ${page.content}"  th:if="${doctors.type.tid}==${doctor.type.tid}">
+            <div class="doctor-img-box">
+                <img src="images/doc_01.jpg" alt="医生头像" class="img-circle" th:src="${doctors.dphoto}" />
+            </div>
+            <div><h4 th:text="${doctors.dname}">贾栋</h4></div>
+            <div th:text="${doctors.hospital.hname}">空军军医大学唐都医院</div>
+            <div th:text="${doctors.type.tname}">神经外科</div>
+            <div class="doctor-item-bottom text-center">
+                <div class="doctor-special" th:text="'擅长'+${doctors.dgood}">擅长:擅长痤疮、黄褐斑、脱发、性病的治疗。</div>
+            </div>
+            <div class="row-fluid">
+                <div style="float: left;padding-right: 10px">
+                    <a th:href="@{/doctor/{did}(did=${doctors.did})}" class="left"><button class="btn btn-primary" type="button">图文问诊</button></a>
+                </div>
+                <div style="float: right;">
+                    <a th:href="@{/doctor/{did}(did=${doctors.did})}" class="left"><button class="btn btn-primary" type="button">视频问诊</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="appointmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-container">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="appointtitle">确认信息</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="step_1" class=" form-horizontal center appointform">
+                        <div class="form-group">
+                            <label class="control-label col-lg-6">科室：</label>
+                            <div class="col-lg-6">
+                                <p class="form-control-static" id="appoint_kname"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-6">医师名：</label>
+                            <div class="col-lg-6">
+                                <p class="form-control-static" id="appoint_dname"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-6">日期：</label>
+                            <div class="col-lg-6">
+                                <p class="form-control-static" id="appoint_date"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-6">时间：</label>
+                            <div class="col-lg-6">
+                                <p class="form-control-static" id="appoint_timetype"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-6">剩余名额：</label>
+                            <div class="col-lg-6">
+                                <p class="form-control-static" id="appoint_cnt">21</p>
+                            </div>
+                        </div>
+                        <input id="appoint_sid" type="hidden"/>
+                    </div>
+
+                    <div id="step_2" class="form-horizontal center appointform" style="display: none;">
+                        <div class="img-container center">
+                            <img src="images/code.jpg"/>
+                        </div>
+                        <div class="text-center"><h4 id="appoint_price"></h4></div>
+                    </div>
+
+                    <div id="step_3" class="form-horizontal center appointform" style="display: none;">
+                        <h1 id="result_ok" class="text-center"><span class="glyphicon glyphicon-ok-circle"></span>&nbsp;&nbsp;&nbsp;&nbsp;预约成功
+                        </h1>
+                        <h1 id="result_no" class="text-center"><span class="glyphicon glyphicon-remove-circle"></span>&nbsp;&nbsp;&nbsp;&nbsp;预约失败
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="appointcancel" data-dismiss="modal">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                    <button type="button" class="btn btn-primary" id="nextbtn">&nbsp;&nbsp;下一步&nbsp;&nbsp;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center pager">
+    <a href="#" class="a-normal text-blackgray">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="#" class="btn bg-lightblue text-white">1</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="#" class="a-normal text-blackgray">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    共<span class="page_total">1</span>页&nbsp;&nbsp;&nbsp;&nbsp;
+    到&nbsp;&nbsp;<input class="page_input" type="text"/>&nbsp;&nbsp;页&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="#" class="btn bg-lightblue text-white"><span class="glyphicon glyphicon-search"></span></a>
+</div>
+
+<div th:replace="_fragments::foot"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
